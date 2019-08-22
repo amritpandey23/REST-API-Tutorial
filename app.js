@@ -1,4 +1,5 @@
 const 
+    path = require("path"),
     express = require("express"),
     data = require("./data.json");
 
@@ -11,6 +12,8 @@ router.get("/employees", function(req, res) {
 });
 
 app.use("/api", router);
+
+app.use("images", express.static(path.join(__dirname, "img")));
 
 app.listen(port=3000, function() {
     console.info(`server started on htpp://localhost:${port}`);
