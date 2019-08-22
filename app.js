@@ -8,12 +8,11 @@ let
     router = express.Router();
 
 router.get("/employees", function(req, res) {
-    res.send(JSON.stringify(data));
+    console.log(req.query); // req.query contains query parameters
+    return res.send(JSON.stringify(data));
 });
 
 app.use("/api", router);
-
-app.use("images", express.static(path.join(__dirname, "img")));
 
 app.listen(port=3000, function() {
     console.info(`server started on htpp://localhost:${port}`);
