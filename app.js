@@ -7,14 +7,21 @@ let
     app = express()
     router = express.Router();
 
+// all employee data
 router.get("/employees", function(req, res) {
-    console.log(req.query); // req.query contains data passed by query string
     return res.send(JSON.stringify(data));
 });
 
-app.use("/api", router);
+// individual employee route
+router.get("/employees/:id", function(req, res) {
+    let 
+        id = req.params.id,
+        employee = data.filter(function(e) {return e.id === parseInt(id)});
 
-app.use("images", express.static(path.join(__dirname, "img")));
+    return res.send(employee);
+});
+
+app.use("/api", router);
 
 app.listen(port=3000, function() {
     console.info(`server started on htpp://localhost:${port}`);
