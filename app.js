@@ -8,7 +8,8 @@ let
     router = express.Router();
 
 router.get("/employees", function(req, res) {
-    res.send(JSON.stringify(data));
+    console.log(req.query); // req.query contains data passed by query string
+    return res.send(JSON.stringify(data));
 });
 
 app.use("/api", router);
