@@ -1,55 +1,23 @@
-var 
-    http = require("http"),
-    url = require("url"),
-    data = require("./data.json");
+const express = require("express");
 
-function getAllData(req, res) {
-    res.end(JSON.stringify(data));
-}
+let app = express();
 
-function saveData(req, res) {
-    let body = "";
+// app.all("/api/employees", function(req, res) {
+//     res.send(`HTTP ${req.method} in action.`)
+// });
 
-    req.on("error", function(error) {
-        res.statusCode = 400;
-        return res.end(error)
-    });
+// app.route("/api/employees")
+//     .get(function(req, res) {
+//         res.send("OK.");
+//     })
+//     .post(function(req, res) {
+//         res.send("OK POST.")
+//     });
 
-    req.on("data", function(chunk) {
-        body += chunk.toString();
-    });
-
-    req.on("end", function() {
-        data.push(JSON.parse(body));
-        res.statusCode = 201;
-        return res.end(`Data added for ${JSON.parse(body).name}.`);
-    });
-    
-}
-
-function defaultRoute(req, res) {
-    res.end("OK");
-}
-
-let server = http.createServer(function(req, res) {
-    let urlParts = url.parse(req.url);
-    if (urlParts.pathname === "/") {
-        switch(req.method) {
-            case "GET":
-                getAllData(req, res);
-                break;
-            case "POST":
-                saveData(req, res);
-                break;
-            default:
-                defaultRoute(req, res);
-                break;
-        }
-    } else {
-        res.end(`Endpoint not found at ${urlParts.pathname}`);
-    }
+app.get("/", function(req, res) {
+    res.send("helo, world.");
 });
 
-server.listen(port=3000, function() {
-    console.log(`Server was started, http://localhost:3000`);
+app.listen(port=3000, function() {
+    console.info(`server started on htpp://localhost:${port}`);
 });
