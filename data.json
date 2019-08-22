@@ -1,7 +1,46 @@
 [
     {
-        "name": "Amrit",
+        "id": 1,
+        "name": "Amrit Pandey",
         "age": 21,
-        "birthplace": "Dhanbad, Jharkhand"
+        "company": "Microsoft Inc.",
+        "location": "Seattle, WA",
+        "team": "Edge Browser",
+        "salary": "$130,000.00",
+        "job_profile": "Full Time",
+        "stock": "$20,000.00"
+    },
+    {
+        "id": 2,
+        "name": "Ujjawal Sharma",
+        "age": 23,
+        "company": "Joyent Co.",
+        "location": "Palo Alto, SF",
+        "team": "Node.js Core",
+        "salary": "$170,000.00",
+        "job_profile": "Contract",
+        "stock": "$10,000.00"
+    },
+    {
+        "id": 3,
+        "name": "Raghuvendra Narendram",
+        "age": 29,
+        "company": "Google Inc.",
+        "location": "Manhattan, NYC, NY",
+        "team": "Go",
+        "salary": "$150,000.00",
+        "job_profile": "Full Time",
+        "stock": "$30,000.00"
+    },
+    {
+        "id": 4,
+        "name": "Alex Croker",
+        "age": 25,
+        "company": "Express Designs Ltd.",
+        "location": "Portland, Oregon",
+        "team": "Backend PHP",
+        "salary": "$70,000.00",
+        "job_profile": "Remote",
+        "stock": null
     }
 ]
