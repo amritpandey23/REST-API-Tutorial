@@ -1,22 +1,16 @@
-const express = require("express");
+const 
+    express = require("express"),
+    data = require("./data.json");
 
-let app = express();
+let 
+    app = express()
+    router = express.Router();
 
-// app.all("/api/employees", function(req, res) {
-//     res.send(`HTTP ${req.method} in action.`)
-// });
-
-// app.route("/api/employees")
-//     .get(function(req, res) {
-//         res.send("OK.");
-//     })
-//     .post(function(req, res) {
-//         res.send("OK POST.")
-//     });
-
-app.get("/", function(req, res) {
-    res.send("helo, world.");
+router.get("/employees", function(req, res) {
+    res.send(JSON.stringify(data));
 });
+
+app.use("/api", router);
 
 app.listen(port=3000, function() {
     console.info(`server started on htpp://localhost:${port}`);
