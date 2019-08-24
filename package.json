@@ -13,6 +13,7 @@
   "dependencies": {
     "express": "github:expressjs/express",
     "knex": "github:tgriesser/knex",
+    "mysql": "^2.17.1",
     "mysql2": "github:sidorares/node-mysql2"
   },
   "devDependencies": {
