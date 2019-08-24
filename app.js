@@ -9,6 +9,7 @@ let app = express();
 // all employee data
 let api_router = express.Router();
 api_router.get("/employees", routes.employees.list_all_employees);
+api_router.get("/employees/:id", routes.employees.list_single_employee);
 app.use("/api", api_router);
 
 let knex_connect = knex({

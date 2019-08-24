@@ -28,4 +28,21 @@ function list_all_employees(req, res) {
             });
 }
 
-module.exports = { list_all_employees };
+function list_single_employee(req, res) {
+    let { knex } = req.app.locals;
+    let { id } = req.params;
+    knex
+        .select("name", "address", "salary")
+        .from("employees")
+        .where({ id: `${id}` })
+            .then(function(data) {
+                return data.length ? 
+                res.status(200).json(data) :
+                res.status(404).end("Employee not found.");
+            })
+            .catch(function(err) {
+                console.error("ERROR:", err);
+            });
+}
+
+module.exports = { list_all_employees, list_single_employee };
