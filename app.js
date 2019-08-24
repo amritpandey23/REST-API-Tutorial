@@ -1,25 +1,13 @@
-const 
-    path = require("path"),
+const
     express = require("express"),
-    data = require("./data.json");
+    routes = require("./routes");
 
 let 
     app = express()
     router = express.Router();
 
 // all employee data
-router.get("/employees", function(req, res) {
-    return res.send(JSON.stringify(data));
-});
-
-// individual employee route
-router.get("/employees/:id", function(req, res) {
-    let 
-        id = req.params.id,
-        employee = data.filter(function(e) {return e.id === parseInt(id)});
-
-    return res.send(employee);
-});
+router.get("/employees", routes.employees.listAllEmployees);
 
 app.use("/api", router);
 
