@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "github:expressjs/express"
+    "express": "github:expressjs/express",
+    "mysql2": "github:sidorares/node-mysql2"
   },
   "devDependencies": {
     "nodemon": "github:remy/nodemon"

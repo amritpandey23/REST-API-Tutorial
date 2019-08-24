@@ -1,16 +1,26 @@
 const
     express = require("express"),
-    routes = require("./routes");
+    mysql = require("mysql2"),
+    routes = require("./routes"),
+    settings = require("./settings");
 
-let 
-    app = express()
-    router = express.Router();
+let app = express();
 
 // all employee data
-router.get("/employees", routes.employees.listAllEmployees);
+let api_router = express.Router();
+api_router.get("/employees", routes.employees.list_all_employees);
+app.use("/api", api_router);
 
-app.use("/api", router);
+let db_connection = mysql.createConnection(settings.database);
+db_connection.connect(function(err) {
+    if (err) {
+        console.error("ERROR: ", err);
+        return process.exit(0);
+    }
 
-app.listen(port=3000, function() {
-    console.info(`server started on htpp://localhost:${port}`);
+    app.locals.db_connection = db_connection;
+    console.info("INFO: connection to database established successfully!");
+    return app.listen(settings.api_server_port, function() {
+        console.info(`INFO: server started on http://localhost:${settings.api_server_port}`);
+    });
 });
