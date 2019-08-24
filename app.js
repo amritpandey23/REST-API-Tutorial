@@ -1,15 +1,21 @@
 const
     express = require("express"),
     knex = require("knex"),
+    settings = require("./settings"),
     routes = require("./routes"),
-    settings = require("./settings");
+    middlewares = require("./middlewares");
 
 let app = express();
 
 // all employee data
 let api_router = express.Router();
 api_router.get("/employees", routes.employees.list_all_employees);
-api_router.get("/employees/:id", routes.employees.list_single_employee);
+api_router.get(
+    "/employees/:id", 
+    middlewares.validate_id, 
+    routes.employees.list_single_employee
+);
+
 app.use("/api", api_router);
 
 let knex_connect = knex({
