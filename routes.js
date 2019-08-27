@@ -1,3 +1,4 @@
-const employees = require("./employees.controller");
+const 
+    { employees, departments } = require("./controllers");
 
-module.exports = { employees };
+module.exports = { employees, departments };
