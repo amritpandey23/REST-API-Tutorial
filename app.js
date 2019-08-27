@@ -9,8 +9,10 @@ const
 let app = express();
 app.use(body_parser.json());
 
-// all employee data
 let api_router = express.Router();
+app.use("/api", api_router);
+
+// employee routes
 api_router.get("/employees", routes.employees.list_all_employees);
 api_router.get(
     "/employees/:id", 
@@ -29,7 +31,24 @@ api_router.delete(
     routes.employees.delete_employee
 );
 
-app.use("/api", api_router);
+// department routes
+api_router.get("/departments", routes.departments.list_all_departments);
+api_router.get(
+    "/departments/:id", 
+    middlewares.validate_id, 
+    routes.departments.list_single_department
+);
+api_router.post("/departments", routes.departments.create_department);
+api_router.patch(
+    "/departments/:id", 
+    middlewares.validate_id, 
+    routes.departments.update_department
+);
+api_router.delete(
+    "/departments/:id", 
+    middlewares.validate_id, 
+    routes.departments.delete_department
+);
 
 let knex_connect = knex({
     client: "mysql",
