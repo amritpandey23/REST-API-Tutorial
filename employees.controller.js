@@ -19,7 +19,7 @@ function list_single_employee(req, res) {
   let { id } = req.params;
   // PROC: ...
   knex
-    .select("name", "address", "salary")
+    .select('*')
     .from("employees")
     .where({ id: `${id}` })
     .then(function (data) {
@@ -34,7 +34,7 @@ function list_single_employee(req, res) {
   return console.log(`GET: list single employee id: ${id}`);
 }
 
-function createEmployee(req, res) {
+function create_employee(req, res) {
   let { knex } = res.app.locals;
   let mandatory_columns = ["name", "email", "salary"];    // not null fields
   let payload = req.body;                                 // data posted
@@ -58,10 +58,36 @@ function createEmployee(req, res) {
   }
 
   return res.status(400).end(`mandatory columns are required. columns: ${mandatory_columns.join(' ')}`);
+
+}
+
+/** update_employee(): update employee information */
+async function update_employee(req, res) { // handler with async/await
+  let { knex } = res.app.locals;
+  let { id } = req.params;
+  let notnull_columns = ["name", "email", "salary"];
+  let payload = req.body;
+  
+  for(let field of Object.keys(payload)) 
+    if (!payload[field] && notnull_columns.includes(field))
+      return res.status(400)
+        .end(`mandatory columns cannot be null. columns: ${notnull_columns.join(' ')}`);
+
+  try {
+    let response = await knex("employees")
+      .where("id", id)
+      .update(payload);
+    return res.status(204).end("employee was updated.");
+  } catch(err) {
+    console.error(err);
+    return res.status(500).end("server problem.");
+  }
+
 }
 
 module.exports = {
   list_all_employees,
   list_single_employee,
-  createEmployee
+  create_employee,
+  update_employee
 };

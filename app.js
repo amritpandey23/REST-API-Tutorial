@@ -17,7 +17,12 @@ api_router.get(
     middlewares.validate_id, 
     routes.employees.list_single_employee
 );
-api_router.post("/employees", routes.employees.createEmployee);
+api_router.post("/employees", routes.employees.create_employee);
+api_router.patch(
+    "/employees/:id", 
+    middlewares.validate_id, 
+    routes.employees.update_employee
+);
 
 app.use("/api", api_router);
 
