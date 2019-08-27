@@ -1,7 +1,12 @@
+const
+  status_messages = require("./status_messages");
+
 function list_all_employees(req, res) {
+  console.log(status_messages.GET("list all employees"));
+
   let { knex } = req.app.locals;
 
-  knex
+  return knex
     .select("name", "address", "salary")
     .from("employees")
     .then(function (data) {
@@ -11,81 +16,91 @@ function list_all_employees(req, res) {
       console.error("ERROR:", err);
     });
 
-  return console.log(`GET: list all employees.`);
 }
 
 function list_single_employee(req, res) {
+  console.log(status_messages.GET(`list single employee`));
+
   let { knex } = req.app.locals;
   let { id } = req.params;
   // PROC: ...
-  knex
+  return knex
     .select('*')
     .from("employees")
     .where({ id: `${id}` })
     .then(function (data) {
-      return data.length ?
+      data.length ?
         res.status(200).json(data) :
-        res.status(404).end("Employee not found.");
+        res.status(404).end(status_messages.EMPLOYEE_NOT_FOUND(id));
     })
     .catch(function (err) {
       console.error("ERROR:", err);
     });
 
-  return console.log(`GET: list single employee id: ${id}`);
 }
 
 function create_employee(req, res) {
+  console.log(status_messages.POST(`create employee`))
+
   let { knex } = res.app.locals;
   let mandatory_columns = ["name", "email", "salary"];    // not null fields
   let payload = req.body;                                 // data posted
   let payload_keys = Object.keys(payload);                // fields in the data
   let mandatory_columns_exists = true;
 
-  for (let field of mandatory_columns) 
-    if (!payload_keys.includes(field)) 
+  for (let field of mandatory_columns)
+    if (!payload_keys.includes(field))
       mandatory_columns_exists = !mandatory_columns_exists;
 
   if (mandatory_columns_exists) {
     return knex("employees")
       .insert(payload)
       .then(function (response) {
-        res.status(200).end("employee created.");
+        res.status(200).end(status_messages.EMPLOYEE_CREATED);
       })
       .catch(function (err) {
-        res.status(500).end("failed.");
+        res.status(500).end(status_messages.UNKNOWN_ERROR);
         console.error(err);
       });
   }
 
-  return res.status(400).end(`mandatory columns are required. columns: ${mandatory_columns.join(' ')}`);
+  return res.status(400).end(status_messages.COLUMNS_REQ(mandatory_columns));
 
 }
 
 /** update_employee(): update employee information */
 async function update_employee(req, res) { // handler with async/await
+  console.log(status_messages.PATCH(`update employee`))
+
   let { knex } = res.app.locals;
   let { id } = req.params;
   let notnull_columns = ["name", "email", "salary"];
   let payload = req.body;
-  
-  for(let field of Object.keys(payload)) 
+
+  for (let field of Object.keys(payload))
     if (!payload[field] && notnull_columns.includes(field))
       return res.status(400)
-        .end(`mandatory columns cannot be null. columns: ${notnull_columns.join(' ')}`);
+        .end(status_messages.COLUMNS_REQ(notnull_columns));
 
   try {
     let response = await knex("employees")
       .where("id", id)
       .update(payload);
-    return res.status(204);
-  } catch(err) {
+
+    return response ?
+      res.status(204).end() :
+      res.status(404).end(status_messages.EMPLOYEE_NOT_FOUND(id));
+
+  } catch (err) {
     console.error(err);
-    return res.status(500).end("server problem.");
+    return res.status(500).end(status_messages.UNKNOWN_ERROR);
   }
 
 }
 
 async function delete_employee(req, res) {
+  console.log(status_messages.DELETE(`delete employee`))
+
   let { knex } = req.app.locals;
   let { id } = req.params;
 
@@ -93,10 +108,15 @@ async function delete_employee(req, res) {
     let response = await knex("employees")
       .where("id", id)
       .del();
-    return res.status(200).end(`employee id: ${id} was deleted.`);
-  } catch(e) {
-    return res.status(500).end("failed");
+
+    return response ?                                                 // if response
+      res.status(200).end(status_messages.EMPLOYEE_DELETED(id)) :     // then 👈
+      res.status(404).end(status_messages.EMPLOYEE_NOT_FOUND(id));    // else 👈
+
+  } catch (e) {
+    return res.status(500).end(status_messages.UNKNOWN_ERROR);
   }
+
 }
 
 module.exports = {
