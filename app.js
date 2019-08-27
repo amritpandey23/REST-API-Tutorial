@@ -1,11 +1,13 @@
 const
     express = require("express"),
     knex = require("knex"),
+    body_parser = require("body-parser"),
     settings = require("./settings"),
     routes = require("./routes"),
     middlewares = require("./middlewares");
 
 let app = express();
+app.use(body_parser.json());
 
 // all employee data
 let api_router = express.Router();
@@ -15,6 +17,7 @@ api_router.get(
     middlewares.validate_id, 
     routes.employees.list_single_employee
 );
+api_router.post("/employees", routes.employees.createEmployee);
 
 app.use("/api", api_router);
 
