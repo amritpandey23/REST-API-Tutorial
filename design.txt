@@ -4,7 +4,7 @@
 * GET about one, single employee        ✅
 * POST create an employee               ✅
 * PATCH update an employee              ✅
-* DELETE an employee
+* DELETE an employee                    ✅
 
 # Do same things for departments 
 
