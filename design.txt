@@ -1,8 +1,8 @@
 # Things we want to do with our API
 
-* GET list all employees
-* GET about one, single employee
-* POST create an employee
+* GET list all employees                ✅
+* GET about one, single employee        ✅
+* POST create an employee               ✅
 * PATCH update an employee
 * DELETE an employee
 
