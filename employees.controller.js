@@ -77,7 +77,7 @@ async function update_employee(req, res) { // handler with async/await
     let response = await knex("employees")
       .where("id", id)
       .update(payload);
-    return res.status(204).end("employee was updated.");
+    return res.status(204);
   } catch(err) {
     console.error(err);
     return res.status(500).end("server problem.");
@@ -85,9 +85,24 @@ async function update_employee(req, res) { // handler with async/await
 
 }
 
+async function delete_employee(req, res) {
+  let { knex } = req.app.locals;
+  let { id } = req.params;
+
+  try {
+    let response = await knex("employees")
+      .where("id", id)
+      .del();
+    return res.status(200).end(`employee id: ${id} was deleted.`);
+  } catch(e) {
+    return res.status(500).end("failed");
+  }
+}
+
 module.exports = {
   list_all_employees,
   list_single_employee,
   create_employee,
-  update_employee
+  update_employee,
+  delete_employee
 };

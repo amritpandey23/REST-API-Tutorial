@@ -23,6 +23,11 @@ api_router.patch(
     middlewares.validate_id, 
     routes.employees.update_employee
 );
+api_router.delete(
+    "/employees/:id",
+    middlewares.validate_id,
+    routes.employees.delete_employee
+);
 
 app.use("/api", api_router);
 
