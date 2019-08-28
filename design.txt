@@ -1,19 +1,19 @@
 # Things we want to do with our API
 
-* GET list all employees                ✅
-* GET about one, single employee        ✅
-* POST create an employee               ✅
-* PATCH update an employee              ✅
-* DELETE an employee                    ✅
+* GET list all employees                        ✅
+* GET about one, single employee                ✅
+* POST create an employee                       ✅
+* PATCH update an employee                      ✅
+* DELETE an employee                            ✅
 
 # Do same things for departments 
 
-* GET list all departments                ✅
-* GET about one, single department        ✅
-* POST create an department               ✅
-* PATCH update an department              ✅
-* DELETE an department                    ✅
+* GET list all departments                      ✅
+* GET about one, single department              ✅
+* POST create an department                     ✅
+* PATCH update an department                    ✅
+* DELETE an department                          ✅
 
 # Departments and Employees
 
-* GET list of all employees in a department
+* GET list of all employees in a department     ✅
