@@ -8,6 +8,7 @@ module.exports = {
     EMPLOYEE_NOT_FOUND: function(id) { return `employee id: ${id}, not found` },
     EMPLOYEE_DELETED: function(id) { return `employee id: ${id}, was deleted` },
     EMPLOYEE_UPDATED: function(id) { return `employee id: ${id}, was updated` },
+    ORDERBY_ERROR: `when using filter please use [field]:ASC|DESC`,
 
     // department
     DEPARTMENT_CREATED: `department created successfully`,
@@ -20,6 +21,7 @@ module.exports = {
     COLUMNS_REQ: function(columns) { return `field values required: ${columns.join(' ')}` },
     DATABASE_ERROR: `error in database`,
     SQL_ERROR: function(err) { return colors.red(`SQL ERROR: ${err.sqlMessage}`) },
+    NO_RETURN: `nothing was found`,
 
     // HTTP methods
     GET: function(desc) { return colors.cyan(`GET: ${desc}`) },
