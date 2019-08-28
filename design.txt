@@ -8,5 +8,9 @@
 
 # Do same things for departments 
 
-* -- // --
+* GET list all departments                ✅
+* GET about one, single department        ✅
+* POST create an department               ✅
+* PATCH update an department              ✅
+* DELETE an department                    ✅
 
