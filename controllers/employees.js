@@ -5,6 +5,30 @@ function list_all_employees(req, res) {
 	console.log(status_messages.GET("list all employees"));
 
 	let { knex } = req.app.locals;
+	let { orderBy } = req.query;
+
+	if(orderBy) {
+		let regex = /(.*)(:)(ASC|DESC)/ig;
+
+		if (regex.test(orderBy)) {
+			let [ column, order ] = orderBy.split(':');
+			return knex
+				.select("name", "address", "salary")
+				.from("employees")
+				.orderBy(column, order)
+				.then(function (data) {
+					data.length ?
+						res.status(200).json(data) :
+						res.status(404).end(status_messages.NO_RETURN);
+				})
+				.catch(function (err) {
+					console.error("ERROR:", err);
+					res.status(500).status_messages(status_messages.UNKNOWN_ERROR);
+				});
+		}
+		
+		return res.status(400).end(status_messages.ORDERBY_ERROR);
+	}
 
 	return knex
 		.select("name", "address", "salary")
@@ -14,6 +38,7 @@ function list_all_employees(req, res) {
 		})
 		.catch(function (err) {
 			console.error("ERROR:", err);
+			res.status(500).status_messages(status_messages.UNKNOWN_ERROR);
 		});
 
 }
