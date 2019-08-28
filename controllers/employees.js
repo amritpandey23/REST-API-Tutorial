@@ -13,7 +13,7 @@ function list_all_employees(req, res) {
 		if (regex.test(orderBy)) {
 			let [ column, order ] = orderBy.split(':');
 			return knex
-				.select("name", "address", "salary")
+				.select()
 				.from("employees")
 				.orderBy(column, order)
 				.then(function (data) {
@@ -31,7 +31,7 @@ function list_all_employees(req, res) {
 	}
 
 	return knex
-		.select("name", "address", "salary")
+		.select()
 		.from("employees")
 		.then(function (data) {
 			res.status(200).json(data);
@@ -55,7 +55,7 @@ function list_single_employee(req, res) {
 		.where({ id: `${id}` })
 		.then(function (data) {
 			data.length ?
-				res.status(200).json(data) :
+				res.status(200).json(data[0]) :
 				res.status(404).end(status_messages.EMPLOYEE_NOT_FOUND(id));
 		})
 		.catch(function (err) {

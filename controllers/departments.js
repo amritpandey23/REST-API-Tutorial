@@ -31,7 +31,7 @@ function list_single_department(req, res) {
 		.where("id", id)
 		.then(function (data) {
 			data.length ?
-				res.status(200).json(data) :
+				res.status(200).json(data[0]) :
 				res.status(404).end(status_messages.DEPARTMENT_NOT_FOUND(id));
 		})
 		.catch(function (err) {
