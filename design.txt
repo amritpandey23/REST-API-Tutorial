@@ -14,3 +14,6 @@
 * PATCH update an department              ✅
 * DELETE an department                    ✅
 
+# Departments and Employees
+
+* GET list of all departments and employees
