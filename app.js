@@ -50,6 +50,12 @@ api_router.delete(
     routes.departments.delete_department
 );
 
+api_router.get(
+    "/departments/:id/employees", 
+    middlewares.validate_id,
+    routes.departments.get_department_employees
+);
+
 let knex_connect = knex({
     client: "mysql",
     connection: settings.database

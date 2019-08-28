@@ -29,5 +29,5 @@ module.exports = {
     PUT: function(desc) { return colors.magenta(`PUT: ${desc}`) },
 
     // unknown
-    UNKNOWN_ERROR: `unknown error occured`
+    UNKNOWN_ERROR: `unknown error occured in server`
 }
