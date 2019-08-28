@@ -16,4 +16,4 @@
 
 # Departments and Employees
 
-* GET list of all departments and employees
+* GET list of all employees in a department
