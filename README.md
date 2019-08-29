@@ -1,6 +1,6 @@
 # REST API with Node.js & Express
 
-## REST
+## :book: REST
 
 - REST stands for **RE**presentational **S**tate **T**ransfer.
 - Representation is of a resource(data). 
