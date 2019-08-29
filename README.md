@@ -5,7 +5,7 @@
 - REST stands for **RE**presentational **S**tate **T**ransfer.
 - Representation is of a resource(data). 
 - Transfer takes place from server to an application state.
-- REST is stateless i.e. state is not managed by server.
+- REST is [stateless](https://whatis.techtarget.com/definition/stateless-app) i.e. state is not managed by server.
 
 ## :book: Resources
 
@@ -21,15 +21,13 @@
 ## :book: RESTful Application
 
 - Application that uses REST standards.
-- Utilisizes HTTP or similar protocol.
-- Uses HATEOAS.
+- Utilise HTTP or similar protocol.
+- Uses [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS).
 
 ## :book: HTTP
 
 - HTTP stands for Hypertext Transfer Protocol.
 - It is used to send and retrive data through references in request and response objects.
-- HTTP.GET and HTTP.DELETE are idempotent i.e. always does and returns same thing.
-- HTTP.POST, HTTP.PUT and HTTP.PATCH are non-idempotent.
 
 ### :point_right: HTTP Responses
 
@@ -46,6 +44,8 @@
 - PATCH : updating data
 - PUT : partially creating data
 - DELETE : deleting data
+- `HTTP.GET` and `HTTP.DELETE` are idempotent i.e. always does and returns same thing.
+- `HTTP.POST`, `HTTP.PUT` and `HTTP.PATCH` are non-idempotent.
 
 ## :book: GraphQL
 
@@ -61,7 +61,7 @@
 - OAuth stands for Open authentication.
 - JWT stands for JSON web tokens.
 - JWT have base 64 encoded data.
-- JWT = [header.payload.signature].
+- JWT = `header.payload.signature`.
 
 ## :book: Resource Identifier
 
