@@ -7,7 +7,7 @@
 - Transfer takes place from server to an application state.
 - REST is stateless i.e. state is not managed by server.
 
-## Resources
+## :book: Resources
 
 - Resources are key business decision. eg. payments, orders, products etc.
 - Resource entity is always declared in plural.
@@ -18,13 +18,13 @@
 ```
 - Entity can be composed of multiple data source.
 
-## RESTful Application
+## :book: RESTful Application
 
 - Application that uses REST standards.
 - Utilisizes HTTP or similar protocol.
 - Uses HATEOAS.
 
-## HTTP
+## :book: HTTP
 
 - HTTP stands for Hypertext Transfer Protocol.
 - It is used to send and retrive data through references in request and response objects.
@@ -47,13 +47,13 @@
 - PUT : partially creating data
 - DELETE : deleting data
 
-## GraphQL
+## :book: GraphQL
 
 - Query language for REST API.
 - Complements REST but not replace it.
 - Acts as a middle man between REST API response and Client.
 
-## Authentication and Authorisation
+## :book: Authentication and Authorisation
 
 - Authentication is to verify a user
 - Authorisation is to verify access to a user.
@@ -63,21 +63,21 @@
 - JWT have base 64 encoded data.
 - JWT = [header.payload.signature].
 
-## Resource Identifiers
+## :book: Resource Identifier
 
 - URI stands for Uniform Resource Identifier. eg.
 ```http
 http://domain.com/api/departments/1
 ```
 
-## Express.js
+## :book: Express.js
 
 - Express is a Node.js web server.
 - It can handle routes.
 - Have HTTP utilities.
 - Have middlewares.
 
-## Query Strings and Parameters
+## :book: Query Strings and Parameters
 
 - Following URI have a query paramter `id`.
 ```http
@@ -88,7 +88,7 @@ Following URI have a query string argument `orderBy`.
 http://domain/api/products?orderBy=price:ASV
 ```
 
-## Relational Databases
+## :book: Relational Databases
 
 - RDMS was invented by Edgar F. Codd of IBM.
 - RDMS have following features:
@@ -105,7 +105,7 @@ http://domain/api/products?orderBy=price:ASV
     2. One-to-Many
     3. Many-to-Many
 
-## SQL
+## :book: SQL
 
 - SQL stands for Structured Query Language.
 - SQL is used to manage RDMS databases like MySQL, MariaDB, PostgreSQL etc.
@@ -117,7 +117,7 @@ http://domain/api/products?orderBy=price:ASV
     4. System manager.
     5. User manager.
 
-## Mini SQL Tutorial
+## :computer: Mini SQL Tutorial
 
 MySQL server is by default hosted on port `3306`. Login to mysql shell with
 ```sql
@@ -174,7 +174,7 @@ INNER JOIN my_table2 AS b
 ON a.id = b.id;
 ```
 
-## Key challenges with RDMS
+## :no_entry_sign: Key challenges with RDMS
 
 - Strict scheme.
 - Ever changing data requirements.
