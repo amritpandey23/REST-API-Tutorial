@@ -31,7 +31,7 @@
 - HTTP.GET and HTTP.DELETE are idempotent i.e. always does and returns same thing.
 - HTTP.POST, HTTP.PUT and HTTP.PATCH are non-idempotent.
 
-### HTTP Responses
+### :point_right: HTTP Responses
 
 - 10X : Information messages
 - 20X : Success messages
@@ -39,7 +39,7 @@
 - 40X : Client error messages
 - 50X : Server error messages
 
-### HTTP Methods
+### :point_right: HTTP Methods
 
 - GET : requesting data
 - POST : creating data
@@ -124,12 +124,12 @@ MySQL server is by default hosted on port `3306`. Login to mysql shell with
 $ mysql -u root -p
 ```
 
-### Creating database
+### :point_right: Creating database
 ```sql
 CREATE DATABASE my_db;
 ```
 
-### Creating table
+### :point_right: Creating table
 ```sql
 USE my_db;
 
@@ -141,32 +141,32 @@ CREATE TABLE my_table (
 );
 ```
 
-### Inserting data in table
+### :point_right: Inserting data in table
 ```sql
 INSERT INTO my_table
 (column1, column2) VALUES
 ("something", "1980-09-22");
 ```
 
-### Updating data in table
+### :point_right: Updating data in table
 ```sql
 UPDATE my_table
 SET column1 = "nothing"
 WHERE id = 1;
 ```
 
-### Deleting data from table
+### :point_right: Deleting data from table
 ```sql
 DELETE FROM my_table
 WHERE id = 1;
 ```
 
-### Query data from table
+### :point_right: Query data from table
 ```sql
 SELECT column1, column2 FROM my_table;
 ```
 
-### Join two tables
+### :point_right: Join two tables
 ```sql
 SELECT a.column1, b.column1
 FROM my_table AS a
