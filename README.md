@@ -69,3 +69,113 @@
 ```http
 http://domain.com/api/departments/1
 ```
+
+## Express.js
+
+- Express is a Node.js web server.
+- It can handle routes.
+- Have HTTP utilities.
+- Have middlewares.
+
+## Query Strings and Parameters
+
+- Following URI have a query paramter `id`.
+```http
+http://domain.com/api/products/:id
+```
+Following URI have a query string argument `orderBy`.
+```http
+http://domain/api/products?orderBy=price:ASV
+```
+
+## Relational Databases
+
+- RDMS was invented by Edgar F. Codd of IBM.
+- RDMS have following features:
+
+    1. Tables
+    2. Rows
+    3. Columns
+    4. Relationships
+    5. Datatypes
+    6. Keys: Primary, Foreign.
+- Relationships can be of following types:
+
+    1. One-to-One
+    2. One-to-Many
+    3. Many-to-Many
+
+## SQL
+
+- SQL stands for Structured Query Language.
+- SQL is used to manage RDMS databases like MySQL, MariaDB, PostgreSQL etc.
+- It has following features:
+
+    1. Database manager.
+    2. Table manager.
+    3. Index manager.
+    4. System manager.
+    5. User manager.
+
+## Mini SQL Tutorial
+
+MySQL server is by default hosted on port `3306`. Login to mysql shell with
+```sql
+$ mysql -u root -p
+```
+
+### Creating database
+```sql
+CREATE DATABASE my_db;
+```
+
+### Creating table
+```sql
+USE my_db;
+
+CREATE TABLE my_table (
+    id INT NOT NULL AUTO_INCREMENT,
+    column1 VARCHAR(50),
+    column2 DATETIME,
+    PRIMARY KEY(id)
+);
+```
+
+### Inserting data in table
+```sql
+INSERT INTO my_table
+(column1, column2) VALUES
+("something", "1980-09-22");
+```
+
+### Updating data in table
+```sql
+UPDATE my_table
+SET column1 = "nothing"
+WHERE id = 1;
+```
+
+### Deleting data from table
+```sql
+DELETE FROM my_table
+WHERE id = 1;
+```
+
+### Query data from table
+```sql
+SELECT column1, column2 FROM my_table;
+```
+
+### Join two tables
+```sql
+SELECT a.column1, b.column1
+FROM my_table AS a
+INNER JOIN my_table2 AS b
+ON a.id = b.id;
+```
+
+## Key challenges with RDMS
+
+- Strict scheme.
+- Ever changing data requirements.
+- Data marts and lakes -- how to update them?
