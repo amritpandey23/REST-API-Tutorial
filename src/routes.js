@@ -13,7 +13,7 @@ api_router.get("/employees", employees.list_all_employees);
 // list single employee
 api_router.get(
 	"/employees/:id",
-	middlewares.validate_id,
+	middlewares.convert_object_id,
 	employees.list_single_employee
 );
 
@@ -23,14 +23,14 @@ api_router.post("/employees", employees.create_employee);
 // update current employee
 api_router.patch(
 	"/employees/:id",
-	middlewares.validate_id,
+	middlewares.convert_object_id,
 	employees.update_employee
 );
 
 // delete an employee
 api_router.delete(
 	"/employees/:id",
-	middlewares.validate_id,
+	middlewares.convert_object_id,
 	employees.delete_employee
 );
 
@@ -42,7 +42,7 @@ api_router.get("/departments", departments.list_all_departments);
 // list single department
 api_router.get(
 	"/departments/:id",
-	middlewares.validate_id,
+	middlewares.convert_object_id,
 	departments.list_single_department
 );
 
@@ -52,14 +52,14 @@ api_router.post("/departments", departments.create_department);
 // update current department
 api_router.patch(
 	"/departments/:id",
-	middlewares.validate_id,
+	middlewares.convert_object_id,
 	departments.update_department
 );
 
 // delete a department
 api_router.delete(
 	"/departments/:id",
-	middlewares.validate_id,
+	middlewares.convert_object_id,
 	departments.delete_department
 );
 
@@ -68,7 +68,7 @@ api_router.delete(
 // list all employees in a department
 api_router.get(
 	"/departments/:id/employees",
-	middlewares.validate_id,
+	middlewares.convert_object_id,
 	departments.get_department_employees
 );
 

@@ -1,6 +1,10 @@
-function validate_id(req, res, next) {
+const
+  { ObjectId } = require("mongodb");
+
+function convert_object_id(req, res, next) {
     let { id } = req.params;
-    return Number(id) ? next() : res.status(400).end("ID must be an integer.");
+    req.object_id = new ObjectId(id);
+    next();
 }
 
-module.exports = { validate_id };
+module.exports = { convert_object_id };

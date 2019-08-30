@@ -19,7 +19,14 @@ function list_single_employee(req, res) {
 	console.log(status_messages.GET(`list single employee`));
 
   let { collection } = req.app.locals;
-  
+  let { object_id } = req;
+  collection.findOne({ _id: object_id })
+    .then(function(data) {
+      res.status(200).json(data);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
 
 }
 
