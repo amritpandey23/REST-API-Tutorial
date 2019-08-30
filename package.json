@@ -14,6 +14,7 @@
     "body-parser": "^1.19.0",
     "express": "github:expressjs/express",
     "knex": "github:tgriesser/knex",
+    "mongodb": "^3.3.2",
     "mysql": "^2.17.1",
     "mysql2": "github:sidorares/node-mysql2"
   },

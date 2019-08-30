@@ -4,95 +4,28 @@ const
 function list_all_employees(req, res) {
 	console.log(status_messages.GET("list all employees"));
 
-	let { knex } = req.app.locals;
-	let { orderBy } = req.query;
-
-	if(orderBy) {
-		let regex = /(.*)(:)(ASC|DESC)/ig;
-
-		if (regex.test(orderBy)) {
-			let [ column, order ] = orderBy.split(':');
-			return knex
-				.select()
-				.from("employees")
-				.orderBy(column, order)
-				.then(function (data) {
-					data.length ?
-						res.status(200).json(data) :
-						res.status(404).end(status_messages.NO_RETURN);
-				})
-				.catch(function (err) {
-					console.error("ERROR:", err);
-					res.status(500).status_messages(status_messages.UNKNOWN_ERROR);
-				});
-		}
-		
-		return res.status(400).end(status_messages.ORDERBY_ERROR);
-	}
-
-	return knex
-		.select()
-		.from("employees")
-		.then(function (data) {
-			res.status(200).json(data);
-		})
-		.catch(function (err) {
-			console.error("ERROR:", err);
-			res.status(500).status_messages(status_messages.UNKNOWN_ERROR);
-		});
+  let { collection } = req.app.locals;
+  collection.find({ }).toArray()
+    .then(function(data) {
+      res.status(200).json(data);
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
 
 }
 
 function list_single_employee(req, res) {
 	console.log(status_messages.GET(`list single employee`));
 
-	let { knex } = req.app.locals;
-	let { id } = req.params;
-	// PROC: ...
-	return knex
-		.select('*')
-		.from("employees")
-		.where({ id: `${id}` })
-		.then(function (data) {
-			data.length ?
-				res.status(200).json(data[0]) :
-				res.status(404).end(status_messages.EMPLOYEE_NOT_FOUND(id));
-		})
-		.catch(function (err) {
-			console.error(err);
-			res.status(500).end(status_messages.DATABASE_ERROR);
-		});
+  let { collection } = req.app.locals;
+  
 
 }
 
 function create_employee(req, res) {
 	console.log(status_messages.POST(`create employee`))
 
-	let { knex } = res.app.locals;
-	let mandatory_columns = ["name", "email", "salary"];    // not null fields
-	let payload = req.body;                                 // data posted
-	let payload_keys = Object.keys(payload);                // fields in the data
-	let mandatory_columns_exists = true;
-
-	for (let field of mandatory_columns)
-		if (!payload_keys.includes(field))
-			mandatory_columns_exists = !mandatory_columns_exists;
-
-	if (mandatory_columns_exists) {
-		return knex("employees")
-			.insert(payload)
-			.then(function (response) {
-				response ?
-					res.status(200).end(status_messages.EMPLOYEE_CREATED) :
-					res.status(400).end(status_messages.UNKNOWN_ERROR);
-			})
-			.catch(function (err) {
-				res.status(500).end(status_messages.UNKNOWN_ERROR);
-				console.error(err);
-			});
-	}
-
-	return res.status(400).end(status_messages.COLUMNS_REQ(mandatory_columns));
 
 }
 
@@ -100,50 +33,13 @@ function create_employee(req, res) {
 async function update_employee(req, res) { // handler with async/await
 	console.log(status_messages.PATCH(`update employee`))
 
-	let { knex } = res.app.locals;
-	let { id } = req.params;
-	let notnull_columns = ["name", "email", "salary"];
-	let payload = req.body;
-
-	for (let field of Object.keys(payload))
-		if (!payload[field] && notnull_columns.includes(field))
-			return res.status(400)
-				.end(status_messages.COLUMNS_REQ(notnull_columns));
-
-	try {
-		let response = await knex("employees")
-			.where("id", id)
-			.update(payload);
-
-		return response ?
-			res.status(204).end() :
-			res.status(404).end(status_messages.EMPLOYEE_NOT_FOUND(id));
-
-	} catch (err) {
-		console.error(err);
-		return res.status(500).end(status_messages.UNKNOWN_ERROR);
-	}
 
 }
 
 async function delete_employee(req, res) {
 	console.log(status_messages.DELETE(`delete employee`))
 
-	let { knex } = req.app.locals;
-	let { id } = req.params;
 
-	try {
-		let response = await knex("employees")
-			.where("id", id)
-			.del();
-
-		return response ?                                                 // if response
-			res.status(200).end(status_messages.EMPLOYEE_DELETED(id)) :     // then 👈
-			res.status(404).end(status_messages.EMPLOYEE_NOT_FOUND(id));    // else 👈
-
-	} catch (e) {
-		return res.status(500).end(status_messages.UNKNOWN_ERROR);
-	}
 
 }
 
