@@ -5,6 +5,27 @@ function list_all_employees(req, res) {
 	console.log(status_messages.GET("list all employees"));
 
   let { collection } = req.app.locals;
+  let { orderBy } = req.query;
+
+  if (orderBy) {
+    let regex = /(.*)(:)(ASC|DESC)/ig;
+    if (regex.test(orderBy)) {
+      let [column, order] = orderBy.split(':');
+      order.toLowerCase() === 'ASC' ? order = 1 : order = -1;
+
+      return collection.find({ }).sort({ [column]: order }).toArray()
+        .then(function (response) {
+          res.status(200).json(response);
+        })
+        .catch(function (err) {
+          console.error(err);
+          res.status(401).end(status_messages.UNKNOWN_ERROR);
+        });
+    } else {
+      return res.status(400).end(status_messages.ORDERBY_ERROR);
+    }
+  }
+
   collection.find({ }).toArray()
     .then(function(data) {
       res.status(200).json(data);

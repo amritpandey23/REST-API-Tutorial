@@ -24,10 +24,10 @@ async function get_department_employees(req, res) {
   let { name } = req.params;
 
   return collection.find({ "department.name": new RegExp(name, 'i') }).toArray()
-    .then(function(response) {
+    .then(function (response) {
       res.status(200).json(response);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.error(err);
       res.status(503).end(status_messages.UNKNOWN_ERROR);
     });
