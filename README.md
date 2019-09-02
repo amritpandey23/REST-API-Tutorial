@@ -1,4 +1,13 @@
-# REST API with Node.js & Express
+# REST API
+
+Code and notes in this repo follows [this](https://www.udemy.com/course/mastering-rest-apis-in-nodejs-zero-to-hero) tutorial on udemy. However, major modification are made by me. The notes in this README file is also composed by me.
+
+## Stack
+- Node.js
+- Express.js
+- MySQL
+- MongoDB
+- GraphQL
 
 ## :book: REST
 
