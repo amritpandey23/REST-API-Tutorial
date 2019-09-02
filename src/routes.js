@@ -39,35 +39,11 @@ api_router.delete(
 // list all departments
 api_router.get("/departments", departments.list_all_departments);
 
-// list single department
-api_router.get(
-	"/departments/:id",
-	middlewares.convert_object_id,
-	departments.list_single_department
-);
-
-// create new department
-api_router.post("/departments", departments.create_department);
-
-// update current department
-api_router.patch(
-	"/departments/:id",
-	middlewares.convert_object_id,
-	departments.update_department
-);
-
-// delete a department
-api_router.delete(
-	"/departments/:id",
-	middlewares.convert_object_id,
-	departments.delete_department
-);
-
 /** --- 👇 employees and departments mixed routes 👇 --- */
 
 // list all employees in a department
 api_router.get(
-	"/departments/:id/employees",
+	"/departments/:name/employees",
 	middlewares.convert_object_id,
 	departments.get_department_employees
 );

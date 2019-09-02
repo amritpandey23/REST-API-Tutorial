@@ -1,52 +1,41 @@
 const
-	status_messages = require("../status_messages");
+  status_messages = require("../status_messages");
 
 function list_all_departments(req, res) {
-	console.log(status_messages.GET("list all departments"));
+  console.log(status_messages.GET("list all departments"));
 
-	
-
-}
-
-function list_single_department(req, res) {
-	console.log(status_messages.GET("list single departments"));
-
-	
-
-}
-
-function create_department(req, res) {
-	console.log(status_messages.POST("create department"));
-
-
+  let { collection } = req.app.locals;
+  return collection.distinct("department.name")
+    .then(function (response) {
+      res.status(200).json(response);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(401).end(status_messages.UNKNOWN_ERROR);
+    });
 
 }
 
-function update_department(req, res) {
-	console.log(status_messages.PATCH("update department"));
-
-	
-
-}
-
-function delete_department(req, res) {
-	console.log(status_messages.DELETE("delete department"));
-
-
-}
 
 async function get_department_employees(req, res) {
-	console.log(status_messages.POST("employees in a department"));
+  console.log(status_messages.GET("employees in a department"));
 
+  let { collection } = req.app.locals;
+  let { name } = req.params;
+
+  return collection.find({ "department.name": new RegExp(name, 'i') }).toArray()
+    .then(function(response) {
+      res.status(200).json(response);
+    })
+    .catch(function(err) {
+      console.error(err);
+      res.status(503).end(status_messages.UNKNOWN_ERROR);
+    });
 
 
 }
 
 module.exports = {
-	list_all_departments,
-	list_single_department,
-	create_department,
-	update_department,
-	delete_department,
-	get_department_employees
+  list_all_departments,
+  get_department_employees
 };

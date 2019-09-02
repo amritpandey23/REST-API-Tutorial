@@ -84,7 +84,7 @@ async function delete_employee(req, res) {
 
   return collection.deleteOne({ _id: object_id })
     .then(function(response) {
-      res.status(201).end(status_messages.EMPLOYEE_DELETED(object_id));
+      res.status(200).end(status_messages.EMPLOYEE_DELETED(object_id));
     })
     .catch(function(err) {
       console.error(err);
