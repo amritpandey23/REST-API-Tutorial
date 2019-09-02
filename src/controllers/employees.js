@@ -56,13 +56,40 @@ function create_employee(req, res) {
 async function update_employee(req, res) { // handler with async/await
 	console.log(status_messages.PATCH(`update employee`))
 
+  let { collection } = res.app.locals;
+  let employee = req.body;
+  let { object_id } = req;
+
+  if (!employee && !object_id)
+    return res.status(403).end(status_messages.BODY_REQ);
+
+  return collection.updateOne({ _id: object_id }, { $set: employee })
+    .then(function(response) {
+      response ?
+        res.status(201).end(status_messages.EMPLOYEE_UPDATED(object_id)) :
+        res.status(500).end(status_messages.DATABASE_ERROR);
+    })
+    .catch(function(err) {
+      console.error(err);
+      res.status(400).end(status_messages.UNKNOWN_ERROR);
+    });
 
 }
 
 async function delete_employee(req, res) {
 	console.log(status_messages.DELETE(`delete employee`))
 
+  let { collection } = res.app.locals;
+  let { object_id } = req;
 
+  return collection.deleteOne({ _id: object_id })
+    .then(function(response) {
+      res.status(201).end(status_messages.EMPLOYEE_DELETED(object_id));
+    })
+    .catch(function(err) {
+      console.error(err);
+      res.status(400).end(status_messages.UNKNOWN_ERROR);
+    });
 
 }
 
