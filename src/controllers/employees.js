@@ -31,8 +31,24 @@ function list_single_employee(req, res) {
 }
 
 function create_employee(req, res) {
-	console.log(status_messages.POST(`create employee`))
+	console.log(status_messages.POST(`create employee`));
 
+  if (!req.body)
+    return res.status(403).end(status_messages.BODY_REQ);
+  
+    let { collection } = req.app.locals;
+    let employee = req.body;
+
+    return collection.insertOne(employee)
+      .then(function(response) {
+        response ?
+          res.status(201).end(`Inserted: ${response.insertedId}`) :
+          res.status(500).end(status_messages.DATABASE_ERROR); 
+      })
+      .catch(function(err) {
+        console.error(err);
+        res.status(400).end(status_messages.UNKNOWN_ERROR);
+      });
 
 }
 

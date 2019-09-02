@@ -9,6 +9,7 @@ module.exports = {
     EMPLOYEE_DELETED: function(id) { return `employee id: ${id}, was deleted` },
     EMPLOYEE_UPDATED: function(id) { return `employee id: ${id}, was updated` },
     ORDERBY_ERROR: `when using filter please use [field]:ASC|DESC`,
+    BODY_REQ: `please specify some data`,
 
     // department
     DEPARTMENT_CREATED: `department created successfully`,
