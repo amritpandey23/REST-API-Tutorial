@@ -12,7 +12,8 @@ api_router.get("/employees", employees.list_all_employees);
 
 // list single employee
 api_router.get(
-	"/employees/:id",
+  "/employees/:id",
+  middlewares.authenticate,
 	middlewares.validate_id,
 	employees.list_single_employee
 );
