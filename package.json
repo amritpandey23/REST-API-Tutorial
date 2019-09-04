@@ -1,15 +1,19 @@
 {
-  "name": "rest_app",
-  "version": "1.0.0",
-  "description": "",
+  "name": "rest_app_node",
+  "version": "0.0.0",
+  "description": "REST API app in Node.js and Express.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ap4gh/rest_app_node.git"
+  },
+  "keywords": ["rest", "graphql", "mongodb", "mysql", "nodejs", "expressjs"],
+  "author": "Amrit Pandey <amrit.github.com>",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
